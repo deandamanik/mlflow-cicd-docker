@@ -45,7 +45,7 @@ jobs:
       # Get latest run_id
       - name: Get latest MLflow run_id
         run: |
-          RUN_ID=$(ls -td mlruns/0/*/ | grep -E '/mlruns/0/[a-z0-9]{32}/' | head -n 1 | cut -d'/' -f3)
+          RUN_ID=$(grep "run_uuid" mlruns/0/*/meta.yaml | head -n 1 | awk '{print $2}')
           echo "RUN_ID=$RUN_ID" >> $GITHUB_ENV
           echo "Latest run_id: $RUN_ID"
           
